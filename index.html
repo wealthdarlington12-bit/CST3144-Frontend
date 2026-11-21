@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>After School Activities</title>
+     
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
 <body>
    <h1>After School Activities</h1>
@@ -14,8 +16,44 @@
    <h2>Explore our Lessons</h2>
 
    <div id="App">
-    
+     <p>{{ message }}</p>
+
+     <div v-for="lesson in lessons">
+         <h3>{{ lesson.subject }}</h3>
+         <p>Location: {{ lesson.location }}</p>
+         <p>Price: {{ lesson.price }}</p>
+         <p>Spaces Available: {{ lesson.spaces }}</p>
+     </div>  
    </div>
+<script>
+    new Vue({
+        el : '#App',
+        data: {
+            message:'Welcome to After School Activities!',
+            lessons:[
+                {
+                subject:'Mathematics',
+                location:'Room 1',
+                price:50,
+                spaces:5
+            },
+            {
+                subject:'English',
+                location:'Room 2',
+                price:40,
+                spaces:5
+            },
+            {
+                subject:'Science',
+                location:'Room 3',
+                price:60,
+                spaces:5
+            },
+
+        ]
+        }
+    });
+</script>
 
 </body>
 </html>
