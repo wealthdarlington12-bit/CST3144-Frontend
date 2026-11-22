@@ -16,7 +16,8 @@
    <h2>Explore our Lessons</h2>
 
    <div id="App">
-     <p>{{ message }}</p>
+     <p>Items in Cart:{{ cart.length }}</p>
+     <button v-if="cart.length > 0" v-on:click="showCart=true">View Cart</button>
      <label>Sort by:</label>
         <select v-model="sortBy">
             <option value="subject">Subject</option>
@@ -30,12 +31,23 @@
             <option value="desc">Descending</option>
         </select>
 
-     <div v-for="lesson in sortedLessons">
+     <div v-if="!showCart" v-for="lesson in sortedLessons">
          <h3>{{ lesson.subject }}</h3>
          <p>Location: {{ lesson.location }}</p>
          <p>Price: {{ lesson.price }}</p>
          <p>Spaces: {{ lesson.spaces }}</p>
+         
+         <button v-on:click="addToCart(lesson)" :disabled="lesson.spaces === 0">Add to Cart</button>
      </div>  
+     <div v-if="showCart">
+         <h2>Your Cart</h2>
+         <button v-on:click="showCart = false">Back to Lessons</button>
+         <div v-for="lesson in cart">
+             <h3>{{lesson.subject}}</h3>
+             <p>price: {{lesson.price}}</p>
+             <button v-on:click="removeFromCart(lesson)">Remove</button>
+         </div>
+     </div>
    </div>
 <script>
     new Vue({
@@ -104,10 +116,16 @@
                 location:'Room 10',
                 price:60,
                 spaces:5
-            },
-        ]
+            }
+            ],
+
+            cart: [],
+            showCart: false
+
         },
-        computed:{
+
+
+        computed: {
             sortedLessons() {
                 return this.lessons.slice().sort((a, b) => {
                     if (this.sortOrder === 'asc') {
@@ -117,8 +135,19 @@
                     }
                 });
             }
-        }
-    });
+        },
+
+            methods: {
+                addToCart(lesson) {
+                    this.cart.push(lesson);
+                    lesson.spaces--;
+                },
+                removeFromCart(lesson) {
+                    this.cart.splice(this.cart.indexOf(lesson), 1);
+                    lesson.spaces++;
+                }
+            }
+        });
 </script>
 
 </body>
