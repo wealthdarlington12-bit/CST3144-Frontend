@@ -47,7 +47,12 @@
              <p>price: {{lesson.price}}</p>
              <button v-on:click="removeFromCart(lesson)">Remove</button>
          </div>
-     </div>
+         <h3>Checkout</h3>
+         <input v-model="name"placeholder="Enter your name">
+         <input v-model="phone"placeholder="Enter your phone number">
+
+         <button v-on:click="checkout()" :disabled="!validName || !validPhone"
+         >Checkout</button>
    </div>
 <script>
     new Vue({
@@ -120,7 +125,9 @@
             ],
 
             cart: [],
-            showCart: false
+            showCart: false,
+            name:'',
+            phone:''
 
         },
 
@@ -131,12 +138,18 @@
                     if (this.sortOrder === 'asc') {
                         return a[this.sortBy] > b[this.sortBy] ? 1 : -1;
                     } else {
-                        return a[this.sortBy] > b[this.sortBy] ? 1 : -1;
+                        return a[this.sortBy] < b[this.sortBy] ? 1 : -1;
                     }
                 });
+            },
+
+            validName() {
+                return/^[A-Za-z ]+$/.test(this.name);
+            },
+            validPhone() {
+                return/^[0-9]+$/.test(this.phone);
             }
         },
-
             methods: {
                 addToCart(lesson) {
                     this.cart.push(lesson);
@@ -145,6 +158,9 @@
                 removeFromCart(lesson) {
                     this.cart.splice(this.cart.indexOf(lesson), 1);
                     lesson.spaces++;
+                },
+                checkout() {
+                    alert('Checkout successful!');
                 }
             }
         });
