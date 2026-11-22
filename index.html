@@ -17,12 +17,24 @@
 
    <div id="App">
      <p>{{ message }}</p>
+     <label>Sort by:</label>
+        <select v-model="sortBy">
+            <option value="subject">Subject</option>
+            <option value="location">Location</option>
+            <option value="price">Price</option>
+            <option value="spaces">Spaces</option>
+            </select>
 
-     <div v-for="lesson in lessons">
+        <select v-model="sortOrder">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+
+     <div v-for="lesson in sortedLessons">
          <h3>{{ lesson.subject }}</h3>
          <p>Location: {{ lesson.location }}</p>
          <p>Price: {{ lesson.price }}</p>
-         <p>Spaces Available: {{ lesson.spaces }}</p>
+         <p>Spaces: {{ lesson.spaces }}</p>
      </div>  
    </div>
 <script>
@@ -30,6 +42,8 @@
         el : '#App',
         data: {
             message:'Welcome to After School Activities!',
+            sortBy:'subject',
+            sortOrder:'asc',
             lessons:[
                 {
                 subject:'Mathematics',
@@ -92,6 +106,17 @@
                 spaces:5
             },
         ]
+        },
+        computed:{
+            sortedLessons() {
+                return this.lessons.slice().sort((a, b) => {
+                    if (this.sortOrder === 'asc') {
+                        return a[this.sortBy] > b[this.sortBy] ? 1 : -1;
+                    } else {
+                        return a[this.sortBy] > b[this.sortBy] ? 1 : -1;
+                    }
+                });
+            }
         }
     });
 </script>
