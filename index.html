@@ -49,6 +49,7 @@
              <button v-on:click="removeFromCart(lesson)">Remove</button>
          </div>
          <h3>Checkout</h3>
+         <p>Total Price: {{ totalPrice }}</p>
          <input v-model="name"placeholder="Enter your name">
          <input v-model="phone"placeholder="Enter your phone number">
 
@@ -149,7 +150,10 @@
             },
             validPhone() {
                 return/^[0-9]+$/.test(this.phone);
-            }
+            },
+            totalPrice() {
+                return this.cart.reduce((total, lesson) => total + lesson.price, 0);
+           }
         },
             methods: {
                 addToCart(lesson) {
