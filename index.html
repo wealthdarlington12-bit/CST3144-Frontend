@@ -41,6 +41,7 @@
      </div>  
      <div v-if="showCart">
          <h2>Your Cart</h2>
+         <p v-if="cart.length === 0">cart is empty</p>
          <button v-on:click="showCart = false">Back to Lessons</button>
          <div v-for="lesson in cart">
              <h3>{{lesson.subject}}</h3>
