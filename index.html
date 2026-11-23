@@ -16,7 +16,7 @@
    <h2>Explore our Lessons</h2>
 
    <div id="App">
-     <p>Items in Cart:{{ cart.length }}</p>
+     <p>Items in Cart:{{ cart.length }} lessons</p>
      <button v-if="cart.length > 0" v-on:click="showCart=true">View Cart</button>
      <label>Sort by:</label>
         <select v-model="sortBy">
