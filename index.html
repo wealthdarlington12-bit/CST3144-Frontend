@@ -8,6 +8,13 @@
      
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color:beige;
+        margin: 20px;
+    }
+</style>
 <body>
    <h1>After School Activities</h1>
 
@@ -33,6 +40,7 @@
 
      <div v-if="!showCart" v-for="lesson in sortedLessons">
          <h3>{{ lesson.subject }}</h3>
+         <img :src="lesson.image" :alt="lesson.subject">
          <p>Location: {{ lesson.location }}</p>
          <p>Price: {{ lesson.price }}</p>
          <p>Spaces: {{ lesson.spaces }}</p>
@@ -69,61 +77,70 @@
                 subject:'Mathematics',
                 location:'Room 1',
                 price:50,
-                spaces:5
+                spaces:5,
+                image:'images/Mathematics.jpg'
             },
             {
                 subject:'English',
                 location:'Room 2',
                 price:40,
-                spaces:5
+                spaces:5,
+                image:'images/English.jpg'
             },
             {
                 subject:'Science',
                 location:'Room 3',
                 price:60,
-                spaces:5
+                spaces:5,
+                image:'images/science.jpeg'
             },
             {
                 subject:'History',
                 location:'Room 4',
                 price:45,
-                spaces:5
+                spaces:5,
+                image:'images/history.jpg'     
             },
             {
                 subject:'Art',
                 location:'Room 5',
                 price:30,
-                spaces:5
+                spaces:5,
+                image:'images/art.jpg'
             },
             {
                 subject:'Music',
                 location:'Room6',
                 price:35,
-                spaces:5
+                spaces:5,
+                image:'images/music.jpg'
             },
             {
                 subject:'Physical Education',
                 location:'Room 7',
                 price:55,
-                spaces:5
+                spaces:5,
+                image:'images/physical education.jpg'
             },
             {
                 subject:'Computer Science',
                 location:'Room8',
                 price:70,
-                spaces:5
-            },
+                spaces:5,
+                image:'images/computer science.jpg'            },
             {
                 subject:'French',
                 location:'Room 9',
                 price:65,
-                spaces:5
+                spaces:5,
+                image:'images/french.jpg'
             },
             {
                 subject:'Spanish',
                 location:'Room 10',
                 price:60,
-                spaces:5
+                spaces:5,
+                image:'images/spanish.jpg'
             }
             ],
 
